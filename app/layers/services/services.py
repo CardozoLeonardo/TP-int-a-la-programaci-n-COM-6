@@ -5,8 +5,6 @@ from ..utilities import translator
 from django.contrib.auth import get_user
 from app.layers.transport import transport
 from app.layers.utilities import card
-from django.db import models
-from app import models as modelss
 
 transport.getAllImages()
 
