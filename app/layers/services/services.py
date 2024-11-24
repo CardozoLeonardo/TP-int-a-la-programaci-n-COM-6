@@ -8,8 +8,15 @@ from app.layers.utilities import card
 
 transport.getAllImages()
 
-def __hash__(x):
-        return hash((x.url, x.name, x.status))
+def __init__(self, url, name, status, last_location, first_seen, user=None, id=None):
+        self.url = url
+        self.name = name
+        self.status = status
+        self.last_location = last_location
+        self.first_seen = first_seen
+
+        self.user = user
+        self.id = id
 
 json_collection = [transport.getAllImages]
 
@@ -26,7 +33,8 @@ repositories.saveFavourite(images)
 
 # añadir favoritos (usado desde el template 'home.html')
 def saveFavourite(request):
-    fav = _hash_(request) # transformamos un request del template en una Card.
+    conversercard=__init__(self, url, name, status, last_location, first_seen, user=None, id=None)
+    fav = conversercard(request, url, name, status, last_location, first_seen, user=None, id=None) # transformamos un request del template en una Card.
     fav.user = get_user(request) # le asignamos el usuario correspondiente.
 
     return repositories.saveFavourite(fav) # lo guardamos en la base.
