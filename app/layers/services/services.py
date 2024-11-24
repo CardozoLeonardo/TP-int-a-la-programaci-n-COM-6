@@ -5,36 +5,25 @@ from ..utilities import translator
 from django.contrib.auth import get_user
 from app.layers.transport import transport
 from app.layers.utilities import card
-
+from app.layers.utilities import translator
 transport.getAllImages()
 
-def __init__(self, url, name, status, last_location, first_seen, user=None, id=None):
-        self.url = url
-        self.name = name
-        self.status = status
-        self.last_location = last_location
-        self.first_seen = first_seen
-
-        self.user = user
-        self.id = id
-
-json_collection = [transport.getAllImages]
 
 def getAllImages(input=None):
     # obtiene un listado de datos "crudos" desde la API, usando a transport.py.
+    json_collection = [transport.getAllImages(None)]
     images = []
-    for element in json_collection:
+    for objeto in json_collection:
     # recorre cada dato crudo de la colección anterior, lo convierte en una Card y lo agrega a images
-        images.append=_hash_(element)
-
+        card = translator.fromRequestIntoCard(objeto)
+        images.append(card)
     return images
 images=getAllImages
 repositories.saveFavourite(images)
 
 # añadir favoritos (usado desde el template 'home.html')
 def saveFavourite(request):
-    conversercard=__init__(self, url, name, status, last_location, first_seen, user=None, id=None)
-    fav = conversercard(request, url, name, status, last_location, first_seen, user=None, id=None) # transformamos un request del template en una Card.
+    fav = translator.fromTemplateIntoCard(request) # transformamos un request del template en una Card.
     fav.user = get_user(request) # le asignamos el usuario correspondiente.
 
     return repositories.saveFavourite(fav) # lo guardamos en la base.
@@ -53,7 +42,7 @@ def getAllFavourites(request):
         mapped_favourites = [repositories.saveFavourite(images)]
 
         for favourite in favourite_list:
-            card = __hash__(favourite) # transformamos cada favorito en una Card, y lo almacenamos en card.
+            card = translator.fromRepositoryIntoCard(favourite) # transformamos cada favorito en una Card, y lo almacenamos en card.
             mapped_favourites.append(card)
 
         return mapped_favourites
