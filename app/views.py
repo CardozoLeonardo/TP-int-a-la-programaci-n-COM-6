@@ -13,9 +13,12 @@ def index_page(request):
 # si el opcional de favoritos no está desarrollado, devuelve un listado vacío.
 def home(request):
     images = []
+    
     for objeto in transport.getAllImages():
-        images.append(objeto['image'])
+        images.append(objeto)
+   
     favourite_list = []
+    favourite_list.append(services.getAllFavourites)
 
     return render(request, 'home.html', { 'images': images, 'favourite_list': favourite_list })
 
