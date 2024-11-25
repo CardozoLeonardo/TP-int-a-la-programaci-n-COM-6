@@ -14,7 +14,7 @@ def index_page(request):
 def home(request):
     images = []
     
-    for objeto in transport.getAllImages():
+    for objeto in services.getAllImages(None):
         images.append(objeto)
    
     favourite_list = []
