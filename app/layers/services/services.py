@@ -32,14 +32,14 @@ def saveFavourite(request):
 def getAllFavourites(request):
     if not request.user.is_authenticated:
         valor1=("El usuario no está autenticado")
-        return [valor1]
+        return valor1
     else:
         user = get_user(request)
 
         repositories.getAllFavourites(user)
 
-        favourite_list = [repositories.getAllFavourites(user)] # buscamos desde el repositories.py TODOS los favoritos del usuario (variable 'user').
-        mapped_favourites = [repositories.saveFavourite(images)]
+        favourite_list = repositories.getAllFavourites(user) # buscamos desde el repositories.py TODOS los favoritos del usuario (variable 'user').
+        mapped_favourites = repositories.saveFavourite(images)
 
         for favourite in favourite_list:
             card = translator.fromRepositoryIntoCard(favourite) # transformamos cada favorito en una Card, y lo almacenamos en card.
