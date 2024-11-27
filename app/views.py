@@ -13,8 +13,7 @@ def index_page(request):
 def home(request):
     images = services.getAllImages(None)
    
-    favourite_list = []
-    favourite_list.append(services.getAllFavourites)
+    favourite_list = services.getAllFavourites(request)
 
     return render(request, 'home.html', { 'images': images, 'favourite_list': favourite_list })
 
@@ -32,16 +31,16 @@ def search(request):
 # Estas funciones se usan cuando el usuario está logueado en la aplicación.
 @login_required
 def getAllFavouritesByUser(request):
-    favourite_list = []
+    favourite_list = services.getAllFavourites(request)
     return render(request, 'favourites.html', { 'favourite_list': favourite_list })
 
 @login_required
 def saveFavourite(request):
-    pass
+    return services.saveFavourite(request)
 
 @login_required
 def deleteFavourite(request):
-    pass
+    return services.deleteFavourite(request)
 
 @login_required
 def exit(request):

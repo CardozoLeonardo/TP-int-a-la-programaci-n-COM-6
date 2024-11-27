@@ -39,7 +39,7 @@ def getAllFavourites(request):
         repositories.getAllFavourites(user)
 
         favourite_list = repositories.getAllFavourites(user) # buscamos desde el repositories.py TODOS los favoritos del usuario (variable 'user').
-        mapped_favourites = repositories.saveFavourite(images)
+        mapped_favourites = []
 
         for favourite in favourite_list:
             card = translator.fromRepositoryIntoCard(favourite) # transformamos cada favorito en una Card, y lo almacenamos en card.
